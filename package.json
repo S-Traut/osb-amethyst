@@ -1,0 +1,15 @@
+{
+  "name": "amethyst",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "develop": "nodemon -q storyboard.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "osbx": "^0.2.6"
+  }
+}
