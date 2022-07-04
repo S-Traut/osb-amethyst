@@ -1,3 +1,5 @@
+import {getFont} from "ftgen";
+
 export const SB_CONSTS = {
   TOP: 0,
   BOT: 480,
@@ -21,6 +23,13 @@ export const SECTIONS_TYPES = {
   BLACK: 1
 }
 
+export const font = getFont("assets/fonts/DMSerifDisplay-Regular.ttf", "beatmap/sb/f");
+
+export function getRandomInt(min: number, max: number) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
 export type AmethystSection = {
   start: number,
@@ -39,6 +48,8 @@ export const PJ_CONSTS = {
     white: {r: 255, g: 255, b: 255},
     dark: {r: 15, g: 15, b: 15},
     black: {r: 0, g: 0, b: 0},  
+    purple: {r: 100, g: 70, b: 180},
+    purple_light: {r: 140, g: 100, b: 220},
   },
   SECTIONS: [
     {start: 20445, end: 39645, mapper: "rentai", type: SECTIONS_TYPES.WHITE },

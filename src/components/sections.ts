@@ -1,12 +1,14 @@
 import {Component} from "osbx";
 import {AmethystSection, PJ_CONSTS, SECTIONS_TYPES} from "../constants";
 import Background from "../plugins/background";
+import Particles from "../plugins/particles";
 import Text from "../plugins/text";
 
 export default class Sections extends Component {
 
   private bg: Background = this.getPlugin(Background);
   private text: Text = this.getPlugin(Text);
+  private particles: Particles = this.getPlugin(Particles);
 
   // in 1/1
   private pulse_rhythm_snares: number[] = [
@@ -25,7 +27,7 @@ export default class Sections extends Component {
 
   private section_white(section: AmethystSection) {
     this.bg.setColor(section.start, section.end, PJ_CONSTS.COLORS.white);
-    
+    this.text.simple(section.mapper, section.start, section.end, {x: 320, y: 200});
   }
 
   private section_black(section: AmethystSection) {
@@ -39,7 +41,10 @@ export default class Sections extends Component {
       this.pulse_rhythm_kicks
     );
 
-    this.text.circle(section.mapper, section.start, section.end, { x: 500, y: 240 });
+    this.text.circle(section.mapper, section.start, section.end, { x: 440, y: 240 });
+    this.particles.blend(section.start, section.end, 20, [
+      PJ_CONSTS.COLORS.purple, PJ_CONSTS.COLORS.purple_light, PJ_CONSTS.COLORS.white
+    ]);
   }
 
   private generate_section(section: AmethystSection) {

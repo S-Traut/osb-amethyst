@@ -2,7 +2,7 @@ import {Plugin} from 'osbx';
 import { newEvent, OsbEvent } from "dotosb";
 import {map_rhythms} from './utils';
 
-type Color = {
+export type Color = {
   r: number,
   g: number,
   b: number,
