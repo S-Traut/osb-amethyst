@@ -1,8 +1,8 @@
 import {Plugin} from "osbx";
-import {getRandomInt} from "../constants";
+import {getRandomInt, PJ_CONSTS, SB_CONSTS} from "../constants";
 import {Color} from "./background";
 import {newEvent} from "dotosb";
-import {Layers, Origins} from "osbx/lib/src/sprite";
+import {Layers, Origins, Position} from "osbx/lib/src/sprite";
 
 export default class Particles extends Plugin {
 
@@ -26,6 +26,59 @@ export default class Particles extends Plugin {
         newEvent('F', [0, 1000], [0, 0.6], 0),
       ]);
       
+    }
+  }
+
+  stars(start: number, end: number) {
+    const duration = end - start;
+    for(let i = 0; i < 100; i++) {
+      
+      const position: Position = {
+        x: getRandomInt(SB_CONSTS.LEFT, SB_CONSTS.RIGHT),
+        y: getRandomInt(SB_CONSTS.TOP, SB_CONSTS.BOT)
+      }
+
+      const sprite = this.createSprite(
+        "sb/d.png",                                
+        Layers.Background, 
+        Origins.Centre, 
+        position
+      );
+
+      const blink_duration = getRandomInt(3000, 2000);
+      sprite.createLoop(start, Math.round(duration / blink_duration), [
+        newEvent("F", [0, blink_duration], [1, 0], 0)
+      ]);
+      sprite.scale(start, 0.03);
+      
+    }
+  }
+
+  gears(start: number, end: number) {
+    let position: Position = {
+      x: 0,
+      y: 480
+    }
+
+    let delay = 0;
+
+    while (position.y > -100) {
+      
+      const sprite = this.createSprite(
+        `sb/g${getRandomInt(0, 6)}.png`,
+        Layers.Background,
+        Origins.Centre,
+        position
+      );
+
+      sprite.fade([start + delay, end], [0.5, 0.5]);
+      sprite.color(start + delay, [50, 50, 50]);
+      sprite.rotate([start + delay, end], [0, getRandomInt(5, 15)]);
+      sprite.scale([start + delay, start + delay + 300], [0.4, getRandomInt(15, 30) / 100], 19);
+
+      position.x += getRandomInt(20, 30);
+      position.y -= getRandomInt(10, 30);
+      delay += 20;
     }
   }
 }

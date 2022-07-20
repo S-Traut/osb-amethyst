@@ -29,6 +29,7 @@ export default class Background extends Plugin {
     sprite.vScale(start, [854, 480]);
     sprite.fade([start, end], [1, 1]); 
     sprite.color(start, [color.r, color.g, color.b]);
+    sprite.additive(start, end);
   }
 
   flash(start: number, duration: number, intensity: number) {

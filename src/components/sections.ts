@@ -25,9 +25,23 @@ export default class Sections extends Component {
     }
   }
 
+  private section_slow(section: AmethystSection) {
+    this.particles.stars(section.start, section.end);
+  }
+
   private section_white(section: AmethystSection) {
+    
     this.bg.setColor(section.start, section.end, PJ_CONSTS.COLORS.white);
-    this.text.simple(section.mapper, section.start, section.end, {x: 320, y: 200});
+    this.bg.setColor(section.start, section.end, PJ_CONSTS.COLORS.white);
+    this.text.simple(
+      `section // ${section.mapper}`, 
+      section.start, 
+      section.end, 
+      { x: 550, y: 400 },
+      PJ_CONSTS.COLORS.dark
+    );
+
+    this.particles.gears(section.start, section.end);
   }
 
   private section_black(section: AmethystSection) {
@@ -43,14 +57,19 @@ export default class Sections extends Component {
 
     this.text.circle(section.mapper, section.start, section.end, { x: 440, y: 240 });
     this.particles.blend(section.start, section.end, 20, [
-      PJ_CONSTS.COLORS.purple, PJ_CONSTS.COLORS.purple_light, PJ_CONSTS.COLORS.white
+      PJ_CONSTS.COLORS.purple,
+      PJ_CONSTS.COLORS.purple_light,
+      PJ_CONSTS.COLORS.white
     ]);
+
+    this.bg.flash(section.end, 1000, 0.5);
   }
 
   private generate_section(section: AmethystSection) {
     switch(section.type) {
       case SECTIONS_TYPES.WHITE: this.section_white(section); break;
       case SECTIONS_TYPES.BLACK: this.section_black(section); break;
+      case SECTIONS_TYPES.SLOW: this.section_slow(section); break;
     }
   }
 
